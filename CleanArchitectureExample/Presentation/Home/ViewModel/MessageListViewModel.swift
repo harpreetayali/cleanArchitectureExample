@@ -9,9 +9,13 @@ import SwiftUI
 
 class MessageListViewModel: ObservableObject {
  
-    var getMessagesUseCase = GetMessagesUseCase(repository: MessageRepositoryImpl(dataSource: MessageDataSourceImpl()))
+    var getMessagesUseCase: GetMessagesUseCase
     
     @Published var messages:[MessageModel] = []
+    
+    init(getMessagesUseCase: GetMessagesUseCase) {
+        self.getMessagesUseCase = getMessagesUseCase
+    }
     
     func getMessages() {
         let result = getMessagesUseCase.execute()
